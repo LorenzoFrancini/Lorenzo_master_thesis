@@ -1,0 +1,21 @@
+p:=13;
+K:=7; 
+F<alp>:=GF(p^2);
+A:=[];
+J:={};
+for a in F do
+    for b in F do
+        if (4*a^3+27*b^2 ne 0) then
+            E:=EllipticCurve([F|a,b]);
+            if not IsSupersingular(E) and (#E mod (K) eq 0) then
+                for P in E do
+                    if Order(P) eq (K) then
+                        Append(~A,[a,b]);
+                        Include(~J,jInvariant(E));
+                        break;
+                    end if;
+                end for;
+            end if;
+        end if;
+    end for;
+end for;                          
